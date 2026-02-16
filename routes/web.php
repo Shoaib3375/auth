@@ -8,15 +8,15 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
-Route::get('/login',function (){
+Route::get('/login', function () {
     return view('login');
 })->name('login');
 
-Route::post('/login',LoginController::class)->name('login.attempt');
+Route::post('/login', LoginController::class)->middleware('throttle:5,1')->name('login.attempt');
 
-Route::view('/dashboard','dashboard')->name('dashboard');
+Route::view('/dashboard', 'dashboard')->middleware('auth')->name('dashboard');
 
-Route::post('/logout',function (){
+Route::post('/logout', function () {
     Auth::guard('web')->logout();
 
     Session::invalidate();
@@ -25,5 +25,5 @@ Route::post('/logout',function (){
 })->name('logout');
 
 
-Route::view('register','register')->name('register');
-Route::post('register',RegisterController::class)->name('register.store');
+Route::view('register', 'register')->name('register');
+Route::post('register', RegisterController::class)->name('register.store');
