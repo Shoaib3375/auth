@@ -12,7 +12,7 @@
                 @endif
 
                 <div class="mb-4">
-                    <input type="email" name="email" placeholder="Email" value="{{old('email')}}"
+                    <input type="text" name="login" placeholder="Email or Username" value="{{old('login')}}"
                            class="w-full px-3 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500">
                 </div>
 

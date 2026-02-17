@@ -12,9 +12,11 @@ class RegisterController extends Controller
     {
         $userData = $request->validate([
             'name'=>['required','string'],
-            'email' => ['required', 'email'],
+            'email' => ['required', 'email', 'unique:users'],
             'password' => ['required'],
         ]);
+        
+        $userData['username'] = explode('@', $userData['email'])[0];
         $userData['password'] = bcrypt($userData['password']);
 
         $user = User::create($userData);
